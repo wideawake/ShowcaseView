@@ -160,23 +160,28 @@ public class ShowcaseView extends RelativeLayout
             @Override
             public void run() {
 
-                if (!shotStateStore.hasShot()) {
+                try {
+                    if (!shotStateStore.hasShot()) {
 
-                    updateBitmap();
-                    Point targetPoint = target.getPoint();
-                    if (targetPoint != null) {
-                        hasNoTarget = false;
-                        if (animate) {
-                            animationFactory.animateTargetToPoint(ShowcaseView.this, targetPoint);
+                        updateBitmap();
+                        Point targetPoint = target.getPoint();
+                        if (targetPoint != null) {
+                            hasNoTarget = false;
+                            if (animate) {
+                                animationFactory.animateTargetToPoint(ShowcaseView.this, targetPoint);
+                            } else {
+                                setShowcasePosition(targetPoint);
+                            }
                         } else {
-                            setShowcasePosition(targetPoint);
+                            hasNoTarget = true;
+                            invalidate();
                         }
-                    } else {
-                        hasNoTarget = true;
-                        invalidate();
-                    }
 
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+
             }
         }, 100);
     }
@@ -404,6 +409,10 @@ public class ShowcaseView extends RelativeLayout
          */
         public ShowcaseView build() {
             insertShowcaseView(showcaseView, activity);
+            return showcaseView;
+        }
+
+        public ShowcaseView prepare() {
             return showcaseView;
         }
 

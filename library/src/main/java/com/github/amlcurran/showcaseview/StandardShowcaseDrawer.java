@@ -23,6 +23,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 class StandardShowcaseDrawer implements ShowcaseDrawer {
 
@@ -41,7 +42,8 @@ class StandardShowcaseDrawer implements ShowcaseDrawer {
         eraserPaint.setAntiAlias(true);
         basicPaint = new Paint();
         showcaseRadius = resources.getDimension(R.dimen.showcase_radius);
-        showcaseDrawable = resources.getDrawable(R.drawable.cling_bleached);
+        Log.i("showcase", "here");
+        showcaseDrawable = resources.getDrawable(R.drawable.cling);
     }
 
     @Override
